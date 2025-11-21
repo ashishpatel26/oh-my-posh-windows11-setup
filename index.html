@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oh My Posh via Scoop - Setup Guide</title>
+    <style>
+        :root {
+            --bg-color: #1e1e2e;
+            --card-bg: #2a2a3c;
+            --accent: #f9e2af; /* Soft yellow/orange */
+            --primary: #89b4fa; /* Soft blue */
+            --text-main: #cdd6f4;
+            --text-muted: #a6adc8;
+            --code-bg: #11111b;
+            --success: #a6e3a1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--text-muted);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--accent);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            border-left: 4px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        h3 {
+            color: var(--text-main);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+
+        .step {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        /* Code Block Styling */
+        .code-wrapper {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            border: 1px solid #333;
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-muted);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--primary);
+            color: #111;
+        }
+
+        .note {
+            background-color: rgba(137, 180, 250, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Oh My Posh Setup Guide</h1>
+        <p>Detailed instructions for Scoop Users</p>
+    </header>
+
+    <div class="step">
+        <h2>1. Install Scoop</h2>
+        <p>If you haven't already, install Scoop by running these lines in a non-admin PowerShell window.</p>
+        <div class="code-wrapper">
+            <button class="copy-btn">Copy</button>
+            <pre><code>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+irm get.scoop.sh | iex</code></pre>
+        </div>
+    </div>
+
+    <div class="step">
+        <h2>2. Install Oh My Posh</h2>
+        <p>Add the main bucket and install the application.</p>
+        <div class="code-wrapper">
+            <button class="copy-btn">Copy</button>
+            <pre><code>scoop bucket add main
+scoop install main/oh-my-posh</code></pre>
+        </div>
+    </div>
+
+    <div class="step">
+        <h2>3. Install Nerd Fonts</h2>
+        <p>Icons require a patched font. We recommend <strong>Meslo LGS NF</strong>.</p>
+        <div class="code-wrapper">
+            <button class="copy-btn">Copy</button>
+            <pre><code>oh-my-posh font install</code></pre>
+        </div>
+        <div class="note">
+            <strong>Important:</strong> After installing, open your Terminal Settings (Ctrl+,), go to <em>Defaults > Appearance</em>, and set "Font face" to <strong>MesloLGS NF</strong>.
+        </div>
+    </div>
+
+    <div class="step">
+        <h2>4. Choose Your Theme Path</h2>
+        <p>Choose <strong>Option A</strong> for built-in themes or <strong>Option B</strong> for your custom JSON.</p>
+
+        <hr style="border-color: #444; margin: 20px 0;">
+
+        <h3>Option A: Apply Built-in Theme</h3>
+        <p>1. Open your profile:</p>
+        <div class="code-wrapper">
+            <button class="copy-btn">Copy</button>
+            <pre><code>notepad $PROFILE</code></pre>
+        </div>
+        <p>2. Add this line to the file (Replacing <code>jandedobbeleer</code> with your chosen theme):</p>
+        <div class="code-wrapper">
+            <button class="copy-btn">Copy</button>
+            <pre><code>oh-my-posh init pwsh --config "$($(scoop prefix oh-my-posh))\themes\jandedobbeleer.omp.json" | Invoke-Expression</code></pre>
+        </div>
+
+        <hr style="border-color: #444; margin: 20px 0;">
+
+        <h3>Option B: Apply Custom Theme</h3>
+        
+        <p><strong>1. Create and Save Theme File</strong><br>
+        Run this to create a folder safely outside the Scoop directory:</p>
+        <div class="code-wrapper">
+            <button class="copy-btn">Copy</button>
+            <pre><code>New-Item -Path "$HOME\.mythemes" -ItemType Directory -Force
+notepad "$HOME\.mythemes\custom.omp.json"</code></pre>
+        </div>
+        <p class="note">Paste your custom JSON code into the Notepad window that opens, then Save and Close.</p>
+
+        <p><strong>2. Update Profile</strong><br>
+        Open your profile configuration:</p>
+        <div class="code-wrapper">
+            <button class="copy-btn">Copy</button>
+            <pre><code>notepad $PROFILE</code></pre>
+        </div>
+        <p>Delete any existing oh-my-posh lines and paste this exactly:</p>
+        <div class="code-wrapper">
+            <button class="copy-btn">Copy</button>
+            <pre><code>oh-my-posh init pwsh --config "$HOME\.mythemes\custom.omp.json" | Invoke-Expression</code></pre>
+        </div>
+    </div>
+
+    <div class="step">
+        <h2>5. Apply Changes</h2>
+        <p>Reload your profile to see the new theme immediately.</p>
+        <div class="code-wrapper">
+            <button class="copy-btn">Copy</button>
+            <pre><code>. $PROFILE</code></pre>
+        </div>
+    </div>
+
+    <footer>
+        <p>Generated for Scoop & Oh My Posh Setup</p>
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.copy-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const code = button.nextElementSibling.innerText;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = button.innerText;
+                button.innerText = 'Copied!';
+                button.style.borderColor = '#a6e3a1';
+                button.style.color = '#a6e3a1';
+                
+                setTimeout(() => {
+                    button.innerText = originalText;
+                    button.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                    button.style.color = '#a6adc8';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
