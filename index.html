@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -124,6 +125,20 @@
             margin: 15px 0;
             font-size: 0.95rem;
         }
+        
+        .theme-resource-note {
+            background-color: rgba(249, 226, 175, 0.1); /* Lighter accent background */
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+        
+        .theme-resource-note a {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
 
         footer {
             text-align: center;
@@ -195,6 +210,16 @@ scoop install main/oh-my-posh</code></pre>
 
         <h3>Option B: Apply Custom Theme</h3>
         
+        <div class="theme-resource-note">
+            <strong>✨ Find More Custom Themes:</strong>
+            <p style="margin-top: 5px; color: var(--text-muted);">
+                For more theme ideas, check out the GitHub topic below. Just copy their entire JSON content and paste it into your custom JSON file.
+            </p>
+            <a href="https://github.com/topics/oh-my-posh-theme" target="_blank" style="text-decoration: none;">
+                <svg style="vertical-align: middle; margin-right: 5px;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 3 8.38 8.38 0 0 0 18 2.5a8.23 8.23 0 0 0-4 1.1A8.38 8.38 0 0 0 9 2.5a8.23 8.23 0 0 0-4 1.1 5.07 5.07 0 0 0-.09 1.77A5.44 5.44 0 0 0 3.5 10.37c0 5.02 3.3 6.19 6.44 7A3.37 3.37 0 0 0 9 19.13V22"></path></svg>
+                GitHub Oh My Posh Theme Topic
+            </a>
+        </div>
         <p><strong>1. Create and Save Theme File</strong><br>
         Run this to create a folder safely outside the Scoop directory:</p>
         <div class="code-wrapper">
@@ -234,18 +259,19 @@ notepad "$HOME\.mythemes\custom.omp.json"</code></pre>
 <script>
     document.querySelectorAll('.copy-btn').forEach(button => {
         button.addEventListener('click', () => {
-            const code = button.nextElementSibling.innerText;
+            // Get the code text from the previous sibling (pre) of the button's parent (.code-wrapper)
+            const code = button.parentElement.querySelector('code').innerText;
             
             navigator.clipboard.writeText(code).then(() => {
                 const originalText = button.innerText;
                 button.innerText = 'Copied!';
-                button.style.borderColor = '#a6e3a1';
-                button.style.color = '#a6e3a1';
+                button.style.borderColor = 'var(--success)';
+                button.style.color = 'var(--success)';
                 
                 setTimeout(() => {
                     button.innerText = originalText;
                     button.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-                    button.style.color = '#a6adc8';
+                    button.style.color = 'var(--text-muted)';
                 }, 2000);
             }).catch(err => {
                 console.error('Failed to copy text: ', err);
@@ -256,3 +282,4 @@ notepad "$HOME\.mythemes\custom.omp.json"</code></pre>
 
 </body>
 </html>
+```
